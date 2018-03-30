@@ -1,0 +1,6 @@
+_build
+_build/*
+setup.data
+setup.log
+main.native
+main.byte
