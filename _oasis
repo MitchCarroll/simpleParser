@@ -1,0 +1,11 @@
+OASISFormat: 0.4
+Name:        test
+Version:     0
+Synopsis:    Test
+Authors:     Mitch Carroll
+License:     MIT
+Executable test
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     main.ml
+  CompiledObject: best
