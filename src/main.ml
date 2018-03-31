@@ -25,7 +25,7 @@ let rec fac = function
 let fac_t = function
         | 0
         | 1 -> 1
-        | n -> let rec fac_aux k acc =
+        | n when n > 1 -> let rec fac_aux k acc =
                  (match k with
                   | 0
                   | 1 -> acc
