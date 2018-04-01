@@ -1,25 +1,18 @@
 (** A simple test program in OCaml  *)
 (** I am using it to learn the Oasis build system *)
 
+(** modules *)
+open Syntax;;
 
-open Funcs;;
+(** the expression
+ *
+ * (1 + ((2 - (3 * 4)) / 5))^6
+ * 
+ **)
+
+let e =
+  Expression(Expression(Constant 1, A, Expression(Expression(Constant 2, S, Expression(Constant 3, M, Constant 4)), D, Constant 5)), E, Constant 6)
 
 (** The main function *)
 let () =
-        begin
-(*
-                print_int (term 537);
-                print_newline ();
-*)
-                print_int (term2 537);
-                print_newline ();
-(*
-                print_int (fac 10);
-                print_newline ();
-*)                
-                print_int (fac_t 10);
-                print_newline ();
-
-                print_int (fac2 10);
-                print_newline ()
-        end
+    print_endline (string_of_int (eval e));;
