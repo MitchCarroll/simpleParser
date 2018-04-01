@@ -18,6 +18,3 @@ let rec eval = function
              ((float_of_int (eval a)) **
               (float_of_int (eval b)))
 ;;
-
-let con a = Constant a;;
-let ex a m b = Expression (a, m, b);;
