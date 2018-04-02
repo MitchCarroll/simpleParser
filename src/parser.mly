@@ -1,24 +1,21 @@
-%token <int> INT
-%token PLUS MINUS TIMES DIVIDE POWER
-%token LPAREN RPAREN
-%token EOF
+%token <int> NUM
+%token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE
 
-%left MINUS PLUS
-%left DIVIDE TIMES
-%left POWER
-
-%start <expr> prog
-
+%start prog
+%type <expression> prog
 %%
 
-prog:
-  | e = expr; EOF { e }
-;
+prog: 
+  | { }
+  | prog line { }
+
+line:
+  | NEWLINE { }
+  | expr NEWLINE { $1 }
 
 expr:
-  | i = INT { cons i }
-| LPAREN; a = expr; m = op; b = expr; RPAREN { eval (exp a m b) }
-;
+  | NUM { $1 }
+  | LPAREN expr op expr RPAREN { eval (exp $2 $3 $4) }
 
 op:
   | PLUS { A }
@@ -26,4 +23,5 @@ op:
   | TIMES { M }
   | DIVIDE { D }
   | POWER { E }
-;
+
+%%

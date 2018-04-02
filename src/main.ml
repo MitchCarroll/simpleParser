@@ -29,4 +29,9 @@ let e =
 
 (** The main function *)
 let () =
-  print_endline (string_of_int (eval e));;
+  (*  print_endline (string_of_int (eval e));; *)
+  let lexbuf = Lexing.from_channel stdin in
+  while true do
+    Parser.prog Lexer.token lexbuf
+  done
+with End_of_file -> exit 0
