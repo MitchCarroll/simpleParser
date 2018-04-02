@@ -34,4 +34,3 @@ let () =
   while true do
     Parser.prog Lexer.token lexbuf
   done
-with End_of_file -> exit 0
