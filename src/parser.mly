@@ -8,13 +8,13 @@
 %left MINUS PLUS DIVIDE TIMES POWER
 
 %start prog
-%type <int> prog
+%type <Syntax.expression> prog
 
 %%
 
 prog: 
-  | { 0 }
-  | prog line { $1 }
+  | { con 0 }
+  | line { $1 }
 
 line:
   | NEWLINE { con 0 }
