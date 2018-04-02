@@ -2,8 +2,10 @@
   open Syntax
 %}
 
-%token <int> INT
+%token <int> NUM
 %token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE
+
+%left MINUS PLUS DIVIDE TIMES POWER
 
 %start prog
 %type <int> prog
@@ -11,6 +13,7 @@
 %%
 
 prog: 
+  | { 0 }
   | prog line { $1 }
 
 line:
@@ -18,7 +21,8 @@ line:
   | expr NEWLINE { $1 }
 
 expr:
-  | INT { con $1 }
+  | NUM { con $1 }
+  | expr op expr { exp $1 $2 $3 }
   | LPAREN expr op expr RPAREN { exp $2 $3 $4 }
 
 op:
