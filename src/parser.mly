@@ -1,21 +1,25 @@
-%token <int> NUM
+%{ 
+  open Syntax
+%}
+
+%token <int> INT
 %token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE
 
 %start prog
-%type <expression> prog
+%type <int> prog
+
 %%
 
 prog: 
-  | { }
-  | prog line { }
+  | prog line { $1 }
 
 line:
-  | NEWLINE { }
+  | NEWLINE { con 0 }
   | expr NEWLINE { $1 }
 
 expr:
-  | NUM { $1 }
-  | LPAREN expr op expr RPAREN { eval (exp $2 $3 $4) }
+  | INT { con $1 }
+  | LPAREN expr op expr RPAREN { exp $2 $3 $4 }
 
 op:
   | PLUS { A }
