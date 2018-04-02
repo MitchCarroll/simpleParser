@@ -10,6 +10,6 @@ let () =
     let lexbuf = Lexing.from_channel stdin in
     while true do
         let answer = (eval (Parser.prog Lexer.token lexbuf))
-        in print_endline (" = " ^ (string_of_int answer))
+        in print_endline (" = " ^ (string_of_float answer))
     done
   with End_of_file -> exit 0

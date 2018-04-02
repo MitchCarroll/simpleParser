@@ -1,7 +1,17 @@
-{ open Parser }
+{ 
+open Parser;;
+open Utilities;;
+}
 let digit = ['0' - '9']
 rule token = parse
-  | digit+ as num { NUM (int_of_string num) }
+  | digit+
+  | "." digit+ 
+  | digit+ "." digit* 
+  | "-" digit+ 
+  | "-." digit+ 
+  | "-" digit+ "." digit* as num { NUM (float_of_string num) }
+(*   | digit+ "!" as num { NUM (float_of_int (fac (int_of_string num))) } *)
+(*   | digit+ "!" { NUM (float_of_int (int_of_string )) } *)
   | '\n' 
   | '\r' { NEWLINE }
   | '+' { PLUS }
