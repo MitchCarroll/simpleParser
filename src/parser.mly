@@ -27,6 +27,9 @@ expr:
   | NUM { con $1 }
   | expr op expr { exp $1 $2 $3 }
   | LPAREN expr op expr RPAREN { exp $2 $3 $4 }
+  | LPAREN NUM LPAREN { con $2 }
+  | expr LPAREN expr RPAREN { exp $1 M $3 }
+  | LPAREN expr RPAREN expr { exp $2 M $4 }
 
 op:
   | PLUS { A }
