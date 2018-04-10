@@ -8,4 +8,4 @@ Executable test
   Path:       src
   BuildTools: ocamlbuild
   MainIs:     main.ml
-  CompiledObject: best
+#  CompiledObject: best
