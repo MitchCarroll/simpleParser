@@ -1,1 +1,1 @@
-val fac : int -> int
+val fac : float -> float

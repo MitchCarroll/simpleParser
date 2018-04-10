@@ -1,12 +1,14 @@
 %{ 
-  open Syntax
+open Syntax;;
+open Utilities;;
 %}
 
 %token <float> NUM
-%token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE
+%token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE FAC MOD
 
 %left PLUS MINUS
 %left TIMES DIVIDE
+%left MOD FAC
 %right POWER
 
 %start prog
@@ -28,6 +30,7 @@ expr:
   | expr LPAREN expr RPAREN { exp $1 M $3 }
   | LPAREN expr RPAREN expr { exp $2 M $4 }
   | expr op expr { exp $1 $2 $3 }
+  | NUM FAC { con (fac $1)  }
   | NUM { con $1 }
   | LPAREN RPAREN { con 0. }
   | { con 1. }
@@ -38,5 +41,6 @@ op:
   | TIMES { M }
   | DIVIDE { D }
   | POWER { E }
+  | MOD { O }
 
 %%

@@ -21,6 +21,8 @@ rule token = parse
   | '^' { POWER }
   | '(' { LPAREN }
   | ')' { RPAREN }
+  | '!' { FAC }
+  | '%' { MOD }
   | eof { raise End_of_file }
   | ' '
   | '\t'

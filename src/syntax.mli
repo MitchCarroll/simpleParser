@@ -1,4 +1,4 @@
-type operation = A | S | M | D | E
+type operation = A | S | M | D | E | O
 type expression =
     Expression of expression * operation * expression
   | Constant of float
