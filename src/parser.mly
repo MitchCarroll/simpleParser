@@ -7,8 +7,8 @@ open Utilities;;
 %token PLUS MINUS TIMES DIVIDE POWER LPAREN RPAREN NEWLINE FAC MOD
 
 %left PLUS MINUS
-%left TIMES DIVIDE
-%left MOD FAC
+%left FAC TIMES DIVIDE
+%left MOD
 %right POWER
 
 %start prog
@@ -25,12 +25,12 @@ line:
   | expr NEWLINE { $1 }
 
 expr:
+  | expr FAC { con (fac (eval $1)) }
   | LPAREN NUM LPAREN { con $2 }
   | LPAREN expr op expr RPAREN { exp $2 $3 $4 }
   | expr LPAREN expr RPAREN { exp $1 M $3 }
   | LPAREN expr RPAREN expr { exp $2 M $4 }
   | expr op expr { exp $1 $2 $3 }
-  | NUM FAC { con (fac $1)  }
   | NUM { con $1 }
   | LPAREN RPAREN { con 0. }
   | { con 1. }
